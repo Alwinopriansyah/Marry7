@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARRY7 - Where Love Meets Crypto 💍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px 50px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(20deg); }
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            color: #000;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid #fff;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 100px 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .roadmap {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .roadmap-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .roadmap-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ffd700;
+            transition: all 0.3s;
+        }
+
+        .roadmap-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .roadmap-item h3 {
+            font-size: 28px;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .roadmap-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .roadmap-item li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .roadmap-item li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+
+        .community {
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .social-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .contract-address {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            display: inline-block;
+        }
+
+        .contract-address p {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        .contract-address code {
+            font-size: 16px;
+            color: #ffd700;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <nav id="navbar">
+        <div class="logo">MARRY7 💍</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#community">Community</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="floating">MARRY7 💍</h1>
+            <p>Where Love Meets Crypto</p>
+            <p style="font-size: 18px; margin-bottom: 30px;">Marry7 is a memecoin that celebrates the luck of love and the magic number 7. Inspired by the concept of "lucky number 7" and the commitment of marriage, Marry7 invites you to "marry" your investment with full conviction.</p>
+            <p style="font-size: 16px; margin-bottom: 30px; font-style: italic; color: #ffd700;">"Till Moon Do Us Part" 🚀💕</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="buyNow()">Buy Now</button>
+                <button class="btn btn-secondary" onclick="learnMore()">Learn More</button>
+            </div>
+            <div class="contract-address">
+                <p>Contract Address</p>
+                <code>0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb</code>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <h2 class="section-title">Why Choose MARRY7?</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">💕</div>
+                <h3>Community Love</h3>
+                <p>Built by the community, for the community. Like partners who support each other through thick and thin - we're in this together.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🍀</div>
+                <h3>Lucky Number 7</h3>
+                <p>Embrace the universal symbol of luck. With 7 on our side, we're destined for greatness in the crypto universe.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <h3>Long-Term Commitment</h3>
+                <p>Marry your investment with full conviction. This isn't just a fling - it's a commitment till moon do us part.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎭</div>
+                <h3>Fun & Romantic Vibe</h3>
+                <p>Combining humor, luck, and positive sentiment. Because investing should be fun and filled with good vibes.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Solid & Loyal</h3>
+                <p>Building a community that sticks together. True partnership means never leaving anyone behind.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>To The Moon Together</h3>
+                <p>Our journey is shared. When one wins, we all win. That's the power of committed community.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="roadmap" id="roadmap">
+        <h2 class="section-title">Roadmap to the Moon</h2>
+        <div class="roadmap-container">
+            <div class="roadmap-item">
+                <h3>Phase 1: Launch</h3>
+                <ul>
+                    <li>Smart contract deployment and audit</li>
+                    <li>Website and social media launch</li>
+                    <li>Initial community building</li>
+                    <li>DEX listing and liquidity provision</li>
+                </ul>
+            </div>
+            <div class="roadmap-item">
+                <h3>Phase 2: Growth</h3>
+                <ul>
+                    <li>Marketing campaign expansion</li>
+                    <li>Partnership announcements</li>
+                    <li>Community events and giveaways</li>
+                    <li>Additional exchange listings</li>
+                </ul>
+            </div>
+            <div class="roadmap-item">
+                <h3>Phase 3: Expansion</h3>
+                <ul>
+                    <li>NFT collection launch</li>
+                    <li>Staking platform development</li>
+                    <li>Strategic partnerships with major players</li>
+                    <li>Global marketing push</li>
+                </ul>
+            </div>
+            <div class="roadmap-item">
+                <h3>Phase 4: Domination</h3>
+                <ul>
+                    <li>Major CEX listings</li>
+                    <li>Cross-chain bridge implementation</li>
+                    <li>Metaverse integration</li>
+                    <li>MAARY7 ecosystem full deployment</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="community" id="community">
+        <h2 class="section-title">Join Our Community</h2>
+        <p style="font-size: 20px; max-width: 700px; margin: 0 auto 20px;">Be part of something bigger. Connect with thousands of MARRY7 holders who share the same commitment. This token isn't just about profit - it's about building a solid and loyal community.</p>
+        <div class="social-links">
+            <a href="https://twitter.com/marry7" target="_blank" class="social-btn" title="Twitter">
+                <span>𝕏</span>
+            </a>
+            <a href="https://marry7.com" target="_blank" class="social-btn" title="Website">
+                <span>🌐</span>
+            </a>
+        </div>
+        <div style="margin-top: 60px;">
+            <button class="btn btn-primary" onclick="buyNow()">Get MARRY7 Now</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 MARRY7. All rights reserved. Cryptocurrency investments carry risk. Do your own research.</p>
+        <p style="margin-top: 10px; font-size: 14px;">This is a memecoin project for entertainment purposes. Till Moon Do Us Part! 🚀💕</p>
+    </footer>
+
+    <script>
+        // Create animated stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Button functions
+        function buyNow() {
+            alert('Redirecting to DEX... In a real implementation, this would open your preferred DEX platform (Uniswap, PancakeSwap, etc.)');
+            // window.open('https://app.uniswap.org/', '_blank');
+        }
+
+        function learnMore() {
+            document.querySelector('#features').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .roadmap-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
